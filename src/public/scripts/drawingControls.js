@@ -143,7 +143,7 @@ class DrawingControls {
 
     #sendData(payload, useDoubleBuffer) {
         // Update the data flag after the canvas has rendered one frame
-        if (!this.#frameTimeout && this.#webSocket) {
+        if ((useDoubleBuffer || !this.#frameTimeout) && this.#webSocket) {
             this.#frameTimeout = setTimeout(() => {
                 const data = this.#canvas.toDataURL("image/png");
                 this.#webSocket.send(data);
